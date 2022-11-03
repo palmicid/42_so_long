@@ -14,12 +14,24 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+# include "minilibx/mlx.h"
+
 # include <stdio.h>
 # include <math.h>
 # include <stdio.h>
 # include <errno.h>
 # include <sys/errno.h>
 # include <string.h>
+
+typedef struct s_progwin
+{
+	void	*mlx_pointer;
+	void	*window;
+}			t_progwin;
+
+
+// so_long
+void	create_window(char **map);
 
 // cx_file_maps_1
 int		cx_file(char **av);

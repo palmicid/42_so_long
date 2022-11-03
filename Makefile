@@ -20,40 +20,43 @@ endif
 
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
-NAME = pipex
+NAME = so_long
 
 LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
-BN_SRC =
+MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework Appkit
+MLX_PATH = minilibx
+MLX = $(MLX_PATH)/libmlx.a
 
-SRCS =
+SRCS = so_long.c cx_file_maps_1.c cx_file_maps_2.c cx_file_maps_3.c \
+		cx_file_maps_4.c error_handle.c
 OBJS = $(SRCS:.c=.o)
-
-BN_OBJS = $(BN_SRC:.c=.o)
 
 .PHONY: all clean fclean re bonus norm
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) #$(OBJS)
-	$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -o $(NAME)
+$(NAME): $(LIBFT) $(MLX)
+	arch -x86_64 $(CC) $(MLX_FLAGS) $(SRCS) $(LIBFT) $(MLX) -o $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFT_PATH) all
+	make -C $(LIBFT_PATH)
+
+$(MLX):
+	make -C $(MLX_PATH)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus:  $(OBJS) $(BN_OBJS)
-	@ar -rcs $(NAME) $(OBJS) $(BN_OBJS)
-
 clean:
 	@make -C $(LIBFT_PATH) clean
-	@$(RM) $(OBJS) $(BN_OBJS)
+	@make -C $(MLX_PATH) clean
+	@$(RM) $(OBJS)
 
 fclean: clean
 	@make -C $(LIBFT_PATH) fclean
+	@make -C $(MLX_PATH) fclean
 	@$(RM) $(NAME)
 
 re: fclean all
