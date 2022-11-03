@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   error_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 20:16:39 by pruangde          #+#    #+#             */
-/*   Updated: 2022/10/27 20:19:04 by pruangde         ###   ########.fr       */
+/*   Created: 2022/11/01 10:40:49 by pruangde          #+#    #+#             */
+/*   Updated: 2022/11/01 10:40:52 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int ac, char **av)
+void	err_closefile_out(int fd, char *str)
 {
-	int		fd;
-	char	**map;
+	if (str)
+		ft_putendl_fd(str, 2);
+	if (fd != -1)
+		close(fd);
+	exit(EXIT_FAILURE);
+}
 
-	if (ac != 2)
-	{
-		write(2, "wrong argument input\n", 21);
-		exit(EXIT_FAILURE);
-	}
-	fd = cx_file(av);
-	map = cx_getmap(fd, av[1]);
-	if (!map)
-		err_closefile_out(fd, 0);
-	write(1, "Game Starto!!!!\n", 16);
-	close(fd);
-	ft_free_p2p_char(map);
-	return (0);
+void	err_with_msg(char *str)
+{
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(str, 2);
 }

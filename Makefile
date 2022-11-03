@@ -32,7 +32,7 @@ OBJS = $(SRCS:.c=.o)
 
 BN_OBJS = $(BN_SRC:.c=.o)
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus norm
 
 all: $(NAME)
 
@@ -72,7 +72,7 @@ norm:
 	@echo "------------------------------------"
 	@echo " !!!!!!!!   NORMINETTE   !!!!!!!!"
 	@echo ""
-	@norminette -R CheckForbiddenSourceHeader ft_*.c
+	@norminette -R CheckForbiddenSourceHeader *.c
 	@norminette -R CheckDefine *.h
 	@echo ""
 	@echo "------------------------------------"
