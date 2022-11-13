@@ -26,19 +26,19 @@ LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework Appkit
-MLX_PATH = minilibx
+MLX_PATH = mlx
 MLX = $(MLX_PATH)/libmlx.a
 
 SRCS = so_long.c cx_file_maps_1.c cx_file_maps_2.c cx_file_maps_3.c \
-		cx_file_maps_4.c error_handle.c
+		cx_file_maps_4.c error_handle.c mapgen_1.c keyhook_utils_1.c
 OBJS = $(SRCS:.c=.o)
 
 .PHONY: all clean fclean re bonus norm
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MLX)
-	arch -x86_64 $(CC) $(MLX_FLAGS) $(SRCS) $(LIBFT) $(MLX) -o $(NAME)
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
+	$(CC) $(MLX_FLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
@@ -47,7 +47,7 @@ $(MLX):
 	make -C $(MLX_PATH)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:
 	@make -C $(LIBFT_PATH) clean

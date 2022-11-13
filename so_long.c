@@ -14,11 +14,39 @@
 
 void	create_window(char **map)
 {
-	t_progwin	*data = NULL;
+	t_progwin	*data;
 
-	data->mlx_pointer = mlx_init();
-	data->window = mlx_new_window(data->mlx_pointer, 1280, 720, "so_long");
-	mlx_loop(data->mlx_pointer);
+	data = (t_progwin *)malloc(sizeof(t_progwin));
+	data->mlx = mlx_init();
+	data->dimen.win_w = count_width(map) * 30;
+	data->dimen.win_h = count_height(map) * 30;
+	data->window = mlx_new_window(data->mlx, data->dimen.win_w, data->dimen.win_h, "OctoSom Traveler");
+	data = init_img(data);
+	mapgen(map, data);
+	printf("octo x = %d\n octo y = %d\n", data->octosom.x, data->octosom.y);
+	
+	mlx_key_hook(data->window, key_hook, &data);
+	
+	mlx_hook(data->window, 17, KEYPRESSMASK, &game_exit, &data);
+	mlx_loop(data->mlx);
+	
+}
+
+t_progwin	init_img(t_progwin *data)
+{
+	int	width;
+	int	height;
+	
+	data.grass = mlx_xpm_file_to_image(data.mlx, "./resource/grass.xpm", &width, &height);
+	data.wall = mlx_xpm_file_to_image(data.mlx, "./resource/wall.xpm", &width, &height);
+	data.over = mlx_xpm_file_to_image(data.mlx, "./resource/deguchi.xpm", &width, &height);
+	data.coin = mlx_xpm_file_to_image(data.mlx, "./resource/coin.xpm", &width, &height);
+	data.octosom.f_1 = mlx_xpm_file_to_image(data.mlx, "./resource/octosom_front_1.xpm", &width, &height);
+	data.octosom.f_2 = mlx_xpm_file_to_image(data.mlx, "./resource/octosom_front_2.xpm", &width, &height);
+	data.octosom.x = 0;
+	data.octosom.y = 0;
+	data.octosom.coin = 0;
+	return (data);
 }
 
 int	main(int ac, char **av)
@@ -35,10 +63,8 @@ int	main(int ac, char **av)
 	map = cx_getmap(fd, av[1]);
 	if (!map)
 		err_closefile_out(fd, 0);
+	close(fd);
 	write(1, "Game Starto!!!!\n", 16);
 	create_window(map);
-	
-	close(fd);
-	ft_free_p2p_char(map);
 	return (0);
 }
