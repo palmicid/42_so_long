@@ -67,7 +67,6 @@ int	main(int ac, char **av)
 	if (!data->map)
 		err_closefile_out(fd, 0);
 	close(fd);
-	//data->mapcoin = count_coin(data->map);
 	ft_putstr_fd("COIN = ", 1);
 	ft_putnbr_fd(data->mapcoin, 1);
 	ft_putchar_fd('\n', 1);
