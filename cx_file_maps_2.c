@@ -92,7 +92,7 @@ int	cx_maplimit(char **map)
 	return (ret);
 }
 
-int	cx_playable(char **map)
+int	cx_playable(char **map, int *coin)
 {
 	int		ret;
 	int		x;
@@ -103,7 +103,7 @@ int	cx_playable(char **map)
 	y = 0;
 	find_pos(map, 'P', &x, &y);
 	mapdup = ft_splitdup(map);
-	ret = recur_fill(mapdup, x, y);
+	ret = recur_fill(mapdup, x, y, coin);
 	ft_free_p2p_char(mapdup);
 	return (ret);
 }

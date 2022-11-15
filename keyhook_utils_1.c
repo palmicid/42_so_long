@@ -41,6 +41,8 @@ int	cx_wall(t_progwin *data, int x, int y)
 {
 	if (data->map[y][x] == WALL)
 		return (0);
+	if (data->map[y][x] == DOOR && (data->octosom.coin < data->mapcoin))
+		return (0);
 	return (1);
 }
 
@@ -50,7 +52,7 @@ void	moveto(t_progwin *data, int x, int y)
 	data->map[data->octosom.y][data->octosom.x] = FLOOR;
 	if (data->map[y][x] == COLLECT)
 		data->octosom.coin += 1;
-	else if (data->map[y][x] == DOOR)
+	if (data->map[y][x] == DOOR)
 		data->end_game = 1;
 	data->map[y][x] = OCTOSOM;
 	data->octosom.x = x;
@@ -66,7 +68,6 @@ int	game_exit(t_progwin *data)
 	ft_putchar_fd('\n', 1);
 	ft_free_p2p_char(data->map);
 	free(data);
-	mlx_destroy_window(data->mlx, data->window);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

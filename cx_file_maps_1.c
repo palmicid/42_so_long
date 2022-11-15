@@ -28,7 +28,7 @@ int	cx_file(char **av)
 	return (fd);
 }
 
-char	**cx_getmap(int fd, char *fname)
+char	**cx_getmap(int fd, char *fname, int *coin)
 {
 	int		num;
 	char	*strmap;
@@ -42,7 +42,7 @@ char	**cx_getmap(int fd, char *fname)
 	read(fd, strmap, num);
 	map = ft_split(strmap, '\n');
 	free(strmap);
-	if (cx_mapvalid(map) == 0)
+	if (cx_mapvalid(map, coin) == 0)
 	{
 		ft_free_p2p_char(map);
 		return (NULL);
@@ -71,7 +71,7 @@ int	countcharfile(char *fname)
 	return (sum);
 }
 
-int	cx_mapvalid(char **map)
+int	cx_mapvalid(char **map, int *coin)
 {
 	if (cx_forbiddenthing(map) == 0)
 	{
@@ -90,7 +90,7 @@ int	cx_mapvalid(char **map)
 	}
 	if (cx_maplimit(map) == 0)
 		return (0);
-	if (cx_playable(map) == 0)
+	if (cx_playable(map, coin) == 0)
 	{
 		err_with_msg("Map no possible exit");
 		return (0);

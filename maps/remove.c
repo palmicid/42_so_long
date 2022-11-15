@@ -9,7 +9,7 @@ int	main(int ac, char **av)
 		int fdin = open(av[1], O_RDONLY);
 		char	*fname;
 		fname = ft_strjoin(av[1], "_fix");
-		int fdout = open(fname, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		int fdout = open(fname, O_RDWR | O_CREAT | O_TRUNC, 0644);
 
 		char buf[2];
 		int	rd = 1;

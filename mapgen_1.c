@@ -34,6 +34,9 @@ void	mapgen(t_progwin *data)
 		i++;
 		y += 30;
 	}
+	if (data->end_game == 1)
+		mlx_string_put(data->mlx, data->window, data->dimen.win_w / 5,
+			data->dimen.win_h / 2, 0, "GAME OVER PRESS ANY KEY TO CLOSE");
 }
 
 void	to_print(char pos, int x, int y, t_progwin *data)
@@ -59,8 +62,5 @@ int	loop_window(t_progwin *data)
 {
 	mlx_clear_window(data->mlx, data->window);
 	mapgen(data);
-	if (data->end_game == 1)
-		mlx_string_put(data->mlx, data->window, data->dimen.win_w / 5,
-			data->dimen.win_h / 2, 0, "GAME OVER PRESS ANY KEY TO CLOSE");
 	return (0);
 }

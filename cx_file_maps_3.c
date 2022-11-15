@@ -72,8 +72,10 @@ int	cx_wall_lower(char **map, int x, int y)
 	return (1);
 }
 
-int	recur_fill(char **map, int x, int y)
+int	recur_fill(char **map, int x, int y, int *c)
 {
+	if (map[x][y] == COLLECT)
+		*c += 1;
 	if (map[x][y] == '1' || map[x][y] == 'F')
 		return (0);
 	else if (map[x][y] == 'E')
@@ -81,7 +83,7 @@ int	recur_fill(char **map, int x, int y)
 	else
 	{
 		map[x][y] = 'F';
-		return (recur_fill(map, x, y + 1) + recur_fill(map, x, y - 1)
-			+ recur_fill(map, x + 1, y) + recur_fill(map, x - 1, y));
+		return (recur_fill(map, x, y + 1, c) + recur_fill(map, x, y - 1, c)
+			+ recur_fill(map, x + 1, y, c) + recur_fill(map, x - 1, y, c));
 	}
 }

@@ -53,6 +53,7 @@ typedef struct s_progwin
 	t_map_dimen	dimen;
 	t_player	octosom;
 	char		**map;
+	int			mapcoin;
 	int			end_game;
 }			t_progwin;
 
@@ -68,23 +69,24 @@ void		init_img(t_progwin *data);
 
 // cx_file_maps_1
 int			cx_file(char **av);
-char		**cx_getmap(int fd, char *fname);
+char		**cx_getmap(int fd, char *fname, int *coin);
 int			countcharfile(char *fname);
-int			cx_mapvalid(char **map);
+int			cx_mapvalid(char **map, int *coin);
+//int			count_coin(char **map);
 
 // cx_file_maps_2
 int			cx_forbiddenthing(char **map);
 int			cx_square(char **map);
 int			cx_outerwall(char **map);
 int			cx_maplimit(char **map);
-int			cx_playable(char **map);
+int			cx_playable(char **map, int *coin);
 
 // cx_file_maps_3
 int			cx_wall_upper(char **map, int y);
 int			cx_wall_left(char **map, int x);
 int			cx_wall_right(char **map, int x, int y);
 int			cx_wall_lower(char **map, int x, int y);
-int			recur_fill(char **map, int x, int y);
+int			recur_fill(char **map, int x, int y, int *c);
 
 // cx_file_maps_4
 int			map_env_counter(char **map, char c);
