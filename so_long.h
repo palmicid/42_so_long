@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:41:28 by pruangde          #+#    #+#             */
-/*   Updated: 2022/10/31 15:41:41 by pruangde         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:20:40 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@
 # include <errno.h>
 # include <sys/errno.h>
 # include <string.h>
-# include <time.h>
 
-
-typedef	struct	s_map_dimen
+typedef struct s_map_dimen
 {
 	int	w;
-	int h;
+	int	h;
 	int	win_w;
 	int	win_h;
 }		t_map_dimen;
@@ -55,7 +53,7 @@ typedef struct s_progwin
 	t_map_dimen	dimen;
 	t_player	octosom;
 	char		**map;
-
+	int			end_game;
 }			t_progwin;
 
 # define WALL 		'1'
@@ -105,10 +103,6 @@ int			game_exit(t_progwin *data);
 int			cx_wall(t_progwin *data, int x, int y);
 void		moveto(t_progwin *data, int x, int y);
 void		print_instruct(void);
-
-// keyhook_utils_2
-
-
 
 // error_handle
 void		err_closefile_out(int fd, char *str);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 12:37:19 by pruangde          #+#    #+#              #
-#    Updated: 2022/10/18 01:46:24 by pruangde         ###   ########.fr        #
+#    Updated: 2022/11/15 20:15:51 by pruangde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ $(MLX):
 	make -C $(MLX_PATH)
 
 %.o: %.c
-#	$(CC) -Imlx -c $< -o $@
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:

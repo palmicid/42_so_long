@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhook_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:55:50 by pruangde          #+#    #+#             */
-/*   Updated: 2022/11/12 15:56:11 by pruangde         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:11:26 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	key_hook(int key, t_progwin *data)
 
 	x = data->octosom.x;
 	y = data->octosom.y;
-	if (key == KEY_ESC)
+	if (key == KEY_ESC || data->end_game == 1)
 		game_exit(data);
 	else if ((key == KEY_W || key == KEY_ARR_UP) && cx_wall(data, x, (y - 1)))
 		moveto(data, x, (y - 1));
@@ -27,7 +27,8 @@ int	key_hook(int key, t_progwin *data)
 		moveto(data, (x - 1), y);
 	else if ((key == KEY_S || key == KEY_ARR_DOWN) && cx_wall(data, x, (y + 1)))
 		moveto(data, x, (y + 1));
-	else if ((key == KEY_D || key == KEY_ARR_RIGHT) && cx_wall(data, (x + 1), y))
+	else if ((key == KEY_D || key == KEY_ARR_RIGHT)
+		&& cx_wall(data, (x + 1), y))
 		moveto(data, (x + 1), y);
 	else if (key != KEY_W && key != KEY_A && key != KEY_S && key != KEY_D
 		&& key != KEY_ARR_UP && key != KEY_ARR_DOWN && key != KEY_ARR_LEFT
@@ -46,12 +47,11 @@ int	cx_wall(t_progwin *data, int x, int y)
 void	moveto(t_progwin *data, int x, int y)
 {
 	data->octosom.step += 1;
-	
 	data->map[data->octosom.y][data->octosom.x] = FLOOR;
 	if (data->map[y][x] == COLLECT)
 		data->octosom.coin += 1;
 	else if (data->map[y][x] == DOOR)
-		game_exit(data);
+		data->end_game = 1;
 	data->map[y][x] = OCTOSOM;
 	data->octosom.x = x;
 	data->octosom.y = y;
@@ -66,7 +66,7 @@ int	game_exit(t_progwin *data)
 	ft_putchar_fd('\n', 1);
 	ft_free_p2p_char(data->map);
 	free(data);
-	//mlx_destroy_window(data->mlx, data->window);
+	mlx_destroy_window(data->mlx, data->window);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
