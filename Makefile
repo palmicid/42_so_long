@@ -47,6 +47,7 @@ $(MLX):
 	make -C $(MLX_PATH)
 
 %.o: %.c
+#	$(CC) -Imlx -c $< -o $@
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:

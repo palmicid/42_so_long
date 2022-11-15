@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-t_progwin	mapgen(char **map, t_progwin *data)
+void	mapgen(t_progwin *data)
 {
 	int	i;
 	int	j;
@@ -21,37 +21,42 @@ t_progwin	mapgen(char **map, t_progwin *data)
 
 	i = 0;
 	y = 0;
-	while (map[i])
+	while (data->map[i])
 	{
 		j = 0;
 		x = 0;
-		while (map[i][j])
+		while (data->map[i][j])
 		{
-			to_print(map[i][j], x, y, data);
+			to_print(data->map[i][j], x, y, data);
 			j++;
 			x += 30;
 		}
 		i++;
 		y += 30;
 	}
-	return (data);
 }
 
-t_progwin	to_print(char pos, int x, int y, t_progwin *data)
+void	to_print(char pos, int x, int y, t_progwin *data)
 {
-	if (pos == '1')
-		mlx_put_image_to_window(data.mlx, data.window, data.wall, x, y);
-	else if (pos == '0' || pos == 'C' || pos == 'P')
-		mlx_put_image_to_window(data.mlx, data.window, data.grass, x, y);
-	else if (pos == 'E')
-		mlx_put_image_to_window(data.mlx, data.window, data.over, x, y);
-	if (pos == 'C')
-		mlx_put_image_to_window(data.mlx, data.window, data.coin, x, y);
-	else if (pos == 'P')
+	if (pos == WALL)
+		mlx_put_image_to_window(data->mlx, data->window, data->wall, x, y);
+	else if (pos == FLOOR || pos == COLLECT || pos == OCTOSOM)
+		mlx_put_image_to_window(data->mlx, data->window, data->grass, x, y);
+	else if (pos == DOOR)
+		mlx_put_image_to_window(data->mlx, data->window, data->over, x, y);
+	if (pos == COLLECT)
+		mlx_put_image_to_window(data->mlx, data->window, data->coin, x, y);
+	else if (pos == OCTOSOM)
 	{
-		mlx_put_image_to_window(data.mlx, data.window, data.octosom.f_1, x, y);
-		data.octosom.x = x;
-		data.octosom.y = y;
+		mlx_put_image_to_window(data->mlx, data->window, data->octosom.f_1, x, y);
+		data->octosom.x = x / 30;
+		data->octosom.y = y / 30;
 	}
-	return (data);
+}
+
+int	loop_window(t_progwin *data)
+{
+	mlx_clear_window(data->mlx, data->window);
+	mapgen(data);
+	return (0);
 }

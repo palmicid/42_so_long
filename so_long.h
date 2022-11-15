@@ -54,15 +54,19 @@ typedef struct s_progwin
 	void		*coin;
 	t_map_dimen	dimen;
 	t_player	octosom;
-	int			count;
+	char		**map;
 
 }			t_progwin;
 
-
+# define WALL 		'1'
+# define FLOOR 		'0'
+# define OCTOSOM	'P'
+# define DOOR 		'E'
+# define COLLECT	'C'
 
 // so_long
-void		create_window(char **map);
-t_progwin	init_img(t_progwin data);
+void		create_window(t_progwin *data);
+void		init_img(t_progwin *data);
 
 // cx_file_maps_1
 int			cx_file(char **av);
@@ -91,13 +95,16 @@ int			count_width(char **map);
 int			count_height(char **map);
 
 // mapgen_1
-t_progwin		mapgen(char **map, t_progwin *data);
-t_progwin		to_print(char pos, int x, int y, t_progwin *data);
+void		mapgen(t_progwin *data);
+void		to_print(char pos, int x, int y, t_progwin *data);
+int			loop_window(t_progwin *data);
 
 // keyhook_utils_1
-int			key_hook(int key, t_progwin data);
-int			game_exit(t_progwin data);
-// int			cx_wall(position);
+int			key_hook(int key, t_progwin *data);
+int			game_exit(t_progwin *data);
+int			cx_wall(t_progwin *data, int x, int y);
+void		moveto(t_progwin *data, int x, int y);
+void		print_instruct(void);
 
 // keyhook_utils_2
 
