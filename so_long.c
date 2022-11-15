@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:39 by pruangde          #+#    #+#             */
-/*   Updated: 2022/11/15 20:18:46 by pruangde         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:03:18 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ int	main(int ac, char **av)
 	}
 	fd = cx_file(av);
 	data = (t_progwin *)malloc(sizeof(t_progwin));
+	if (!data)
+		err_closefile_out(fd, 0);
+	data->mapcoin = 0;
 	data->map = cx_getmap(fd, av[1], &(data->mapcoin));
 	if (!data->map)
 		err_closefile_out(fd, 0);
