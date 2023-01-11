@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:39 by pruangde          #+#    #+#             */
-/*   Updated: 2023/01/11 11:19:28 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:36:18 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	create_window(t_progwin *data)
 	data->dimen.win_h = count_height(data->map) * 30;
 	data->window = mlx_new_window(data->mlx, data->dimen.win_w,data->dimen.win_h, "OctoSom Traveler");
 	init_img(data);
-	ft_putendl_fd("BUG-001", 2);		// 001
 	mapgen(data);
-	ft_putendl_fd("BUG-002", 2);		// 002
 	mlx_loop_hook(data->mlx, loop_window, data);
 	mlx_hook(data->window, 2, KEYPRESSMASK, key_hook, data);
 	mlx_hook(data->window, 17, KEYPRESSMASK, game_exit, data);
