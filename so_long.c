@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:39 by pruangde          #+#    #+#             */
-/*   Updated: 2022/11/19 20:55:01 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:19:28 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	create_window(t_progwin *data)
 	data->dimen.win_h = count_height(data->map) * 30;
 	data->window = mlx_new_window(data->mlx, data->dimen.win_w,data->dimen.win_h, "OctoSom Traveler");
 	init_img(data);
+	ft_putendl_fd("BUG-001", 2);		// 001
 	mapgen(data);
+	ft_putendl_fd("BUG-002", 2);		// 002
 	mlx_loop_hook(data->mlx, loop_window, data);
 	mlx_hook(data->window, 2, KEYPRESSMASK, key_hook, data);
-	mlx_hook(data->window, 17, KEYPRESSMASK, game_exit, &data);
+	mlx_hook(data->window, 17, KEYPRESSMASK, game_exit, data);
 	mlx_loop(data->mlx);
 }
 
@@ -36,7 +38,7 @@ void	init_img(t_progwin *data)
 	data->over = mlx_xpm_file_to_image(data->mlx, "./resource/deguchi.xpm", &width, &height);
 	data->coin = mlx_xpm_file_to_image(data->mlx, "./resource/coin.xpm", &width, &height);
 	data->octosom.f_1 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_front_1.xpm", &width, &height);
-	data->octosom.f_2 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_front_2.xpm", &width, &height);
+	data->octosom.f_2 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_fin.xpm", &width, &height);
 	data->octosom.x = 0;
 	data->octosom.y = 0;
 	data->octosom.coin = 0;

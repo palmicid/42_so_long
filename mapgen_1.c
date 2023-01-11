@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapgen_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:50:50 by pruangde          #+#    #+#             */
-/*   Updated: 2022/11/15 20:12:53 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:21:10 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	to_print(char pos, int x, int y, t_progwin *data)
 		mlx_put_image_to_window(data->mlx, data->window, data->coin, x, y);
 	else if (pos == OCTOSOM)
 	{
-		mlx_put_image_to_window(data->mlx, data->window,
-			data->octosom.f_1, x, y);
+		if (data->end_game == 1)
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom.f_2, x, y);
+		else
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom.f_1, x, y);
 		data->octosom.x = x / 30;
 		data->octosom.y = y / 30;
 	}
