@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:41:28 by pruangde          #+#    #+#             */
-/*   Updated: 2023/01/11 11:19:15 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/01/30 02:26:56 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <errno.h>
 # include <sys/errno.h>
 # include <string.h>
+# include <time.h>
 
 typedef struct s_map_dimen
 {
@@ -36,6 +37,14 @@ typedef struct s_player
 {
 	void	*f_1;
 	void	*f_2;
+	void	*l_1;
+	void	*l_2;
+	void	*r_1;
+	void	*r_2;
+	void	*b_1;
+	void	*b_2;
+	void	*ot_f;
+	char	dct;
 	int		step;
 	int		x;
 	int		y;
@@ -51,10 +60,11 @@ typedef struct s_progwin
 	void		*over;
 	void		*coin;
 	t_map_dimen	dimen;
-	t_player	octosom;
+	t_player	*octosom;
 	char		**map;
 	int			mapcoin;
 	int			end_game;
+	time_t		anitime;
 }			t_progwin;
 
 # define WALL 		'1'
@@ -72,7 +82,6 @@ int			cx_file(char **av);
 char		**cx_getmap(int fd, char *fname, int *coin);
 int			countcharfile(char *fname);
 int			cx_mapvalid(char **map, int *coin);
-//int			count_coin(char **map);
 
 // cx_file_maps_2
 int			cx_forbiddenthing(char **map);
@@ -96,6 +105,7 @@ int			count_height(char **map);
 
 // mapgen_1
 void		mapgen(t_progwin *data);
+void		sprite_dct(t_progwin *data, int x, int y);
 void		to_print(char pos, int x, int y, t_progwin *data);
 int			loop_window(t_progwin *data);
 

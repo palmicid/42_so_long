@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:39 by pruangde          #+#    #+#             */
-/*   Updated: 2023/01/11 11:36:18 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/01/30 02:31:28 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	create_window(t_progwin *data)
 	data->dimen.win_w = count_width(data->map) * 30;
 	data->dimen.win_h = count_height(data->map) * 30;
 	data->window = mlx_new_window(data->mlx, data->dimen.win_w,data->dimen.win_h, "OctoSom Traveler");
+	data->octosom = (t_player *)malloc(sizeof(t_player));
 	init_img(data);
 	mapgen(data);
 	mlx_loop_hook(data->mlx, loop_window, data);
@@ -35,11 +36,19 @@ void	init_img(t_progwin *data)
 	data->wall = mlx_xpm_file_to_image(data->mlx, "./resource/wall.xpm", &width, &height);
 	data->over = mlx_xpm_file_to_image(data->mlx, "./resource/deguchi.xpm", &width, &height);
 	data->coin = mlx_xpm_file_to_image(data->mlx, "./resource/coin.xpm", &width, &height);
-	data->octosom.f_1 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_front_1.xpm", &width, &height);
-	data->octosom.f_2 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_fin.xpm", &width, &height);
-	data->octosom.x = 0;
-	data->octosom.y = 0;
-	data->octosom.coin = 0;
+	data->octosom->dct = 'D';
+	data->octosom->f_1 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_front_1.xpm", &width, &height);
+	data->octosom->f_2 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_front_2.xpm", &width, &height);
+	data->octosom->l_1 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_L_1.xpm", &width, &height);
+	data->octosom->l_2 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_L_2.xpm", &width, &height);
+	data->octosom->r_1 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_R_1.xpm", &width, &height);
+	data->octosom->r_2 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_R_2.xpm", &width, &height);
+	data->octosom->b_1 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_back_1.xpm", &width, &height);
+	data->octosom->b_2 = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_back_2.xpm", &width, &height);
+	data->octosom->ot_f = mlx_xpm_file_to_image(data->mlx, "./resource/octosom_fin.xpm", &width, &height);
+	data->octosom->x = 0;
+	data->octosom->y = 0;
+	data->octosom->coin = 0;
 	data->end_game = 0;
 	return ;
 }

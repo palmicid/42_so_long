@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+         #
+#    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 12:37:19 by pruangde          #+#    #+#              #
-#    Updated: 2022/11/15 20:15:51 by pruangde         ###   ########.fr        #
+#    Updated: 2023/01/29 22:28:20 by pruangde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ clean:
 
 fclean: clean
 	@make -C $(LIBFT_PATH) fclean
-	@make -C $(MLX_PATH) fclean
+	@make -C $(MLX_PATH) clean
 	@$(RM) $(NAME)
 
 re: fclean all

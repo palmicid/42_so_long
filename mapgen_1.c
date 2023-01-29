@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:50:50 by pruangde          #+#    #+#             */
-/*   Updated: 2023/01/11 11:21:10 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/01/30 02:28:04 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,39 @@ void	mapgen(t_progwin *data)
 			data->dimen.win_h / 2, 0, "GAME OVER PRESS ANY KEY TO CLOSE");
 }
 
+void	sprite_dct(t_progwin *data, int x, int y)
+{
+	data->anitime = time(NULL);
+	if (data->octosom->dct == 'U')
+	{
+		if (data->anitime % 2 == 0)
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->b_1, x, y);
+		else
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->b_2, x, y);
+	}
+	else if (data->octosom->dct == 'L')
+	{
+		if (data->anitime % 2 == 0)
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->l_1, x, y);
+		else
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->l_2, x, y);
+	}
+	else if (data->octosom->dct == 'D')
+	{
+		if (data->anitime % 2 == 0)
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->f_1, x, y);
+		else
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->f_2, x, y);
+	}
+	else if (data->octosom->dct == 'R')
+	{
+		if (data->anitime % 2 == 0)
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->r_1, x, y);
+		else
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->r_2, x, y);
+	}
+}
+
 void	to_print(char pos, int x, int y, t_progwin *data)
 {
 	if (pos == WALL)
@@ -52,11 +85,11 @@ void	to_print(char pos, int x, int y, t_progwin *data)
 	else if (pos == OCTOSOM)
 	{
 		if (data->end_game == 1)
-			mlx_put_image_to_window(data->mlx, data->window, data->octosom.f_2, x, y);
+			mlx_put_image_to_window(data->mlx, data->window, data->octosom->ot_f, x, y);
 		else
-			mlx_put_image_to_window(data->mlx, data->window, data->octosom.f_1, x, y);
-		data->octosom.x = x / 30;
-		data->octosom.y = y / 30;
+			sprite_dct(data, x, y);
+		data->octosom->x = x / 30;
+		data->octosom->y = y / 30;
 	}
 }
 
