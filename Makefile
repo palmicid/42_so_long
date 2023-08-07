@@ -6,7 +6,7 @@
 #    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 12:37:19 by pruangde          #+#    #+#              #
-#    Updated: 2023/01/29 22:28:20 by pruangde         ###   ########.fr        #
+#    Updated: 2023/01/30 08:55:04 by pruangde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ san:
 	$(CC) -fsanitize=address -fno-omit-frame-pointer maintest.c
 
 norm:
+	@say -v kyoko "ノルミネットをチェックしています"
 	@echo "------------------------------------"
 	@echo " !!!!!!!!   NORMINETTE   !!!!!!!!"
 	@echo ""

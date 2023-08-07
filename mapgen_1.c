@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:50:50 by pruangde          #+#    #+#             */
-/*   Updated: 2023/01/30 02:28:04 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/08/06 23:51:15 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	mapgen(t_progwin *data)
 		{
 			to_print(data->map[i][j], x, y, data);
 			j++;
-			x += 30;
+			x += 60;
 		}
 		i++;
-		y += 30;
+		y += 60;
 	}
 	if (data->end_game == 1)
 		mlx_string_put(data->mlx, data->window, data->dimen.win_w / 5,
@@ -88,8 +88,8 @@ void	to_print(char pos, int x, int y, t_progwin *data)
 			mlx_put_image_to_window(data->mlx, data->window, data->octosom->ot_f, x, y);
 		else
 			sprite_dct(data, x, y);
-		data->octosom->x = x / 30;
-		data->octosom->y = y / 30;
+		data->octosom->x = x / 60;
+		data->octosom->y = y / 60;
 	}
 }
 

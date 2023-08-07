@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:39 by pruangde          #+#    #+#             */
-/*   Updated: 2023/01/30 02:31:28 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/08/06 23:13:10 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	create_window(t_progwin *data)
 {
 	data->mlx = mlx_init();
-	data->dimen.win_w = count_width(data->map) * 30;
-	data->dimen.win_h = count_height(data->map) * 30;
+	data->dimen.win_w = count_width(data->map) * 60;
+	data->dimen.win_h = count_height(data->map) * 60;
 	data->window = mlx_new_window(data->mlx, data->dimen.win_w,data->dimen.win_h, "OctoSom Traveler");
 	data->octosom = (t_player *)malloc(sizeof(t_player));
 	init_img(data);

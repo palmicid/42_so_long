@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:55:50 by pruangde          #+#    #+#             */
-/*   Updated: 2023/01/29 23:18:06 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:02:27 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,30 @@ int	key_hook(int key, t_progwin *data)
 	y = data->octosom->y;
 	if (key == KEY_ESC || data->end_game == 1)
 		game_exit(data);
-	else if ((key == KEY_W || key == KEY_ARR_UP) && cx_wall(data, x, (y - 1)))
-		{ moveto(data, x, (y - 1)); data->octosom->dct = 'U'; }
-	else if ((key == KEY_A || key == KEY_ARR_LEFT) && cx_wall(data, (x - 1), y))
-		{ moveto(data, (x - 1), y); data->octosom->dct = 'L'; }
-	else if ((key == KEY_S || key == KEY_ARR_DOWN) && cx_wall(data, x, (y + 1)))
-		{ moveto(data, x, (y + 1)); data->octosom->dct = 'D'; }
-	else if ((key == KEY_D || key == KEY_ARR_RIGHT) && cx_wall(data, (x + 1), y))
-		{ moveto(data, (x + 1), y); data->octosom->dct = 'R'; }
+	else if (key == KEY_W || key == KEY_ARR_UP)
+	{ 
+		if (cx_wall(data, x, (y - 1)))
+			moveto(data, x, (y - 1));
+		data->octosom->dct = 'U'; 
+	}
+	else if (key == KEY_A || key == KEY_ARR_LEFT)
+	{ 
+		if (cx_wall(data, (x - 1), y))
+			moveto(data, (x - 1), y);
+		data->octosom->dct = 'L';
+	}
+	else if (key == KEY_S || key == KEY_ARR_DOWN)
+	{ 
+		if (cx_wall(data, x, (y + 1)))
+			moveto(data, x, (y + 1));
+		data->octosom->dct = 'D';
+	}
+	else if (key == KEY_D || key == KEY_ARR_RIGHT)
+	{ 
+		if (cx_wall(data, (x + 1), y))
+			moveto(data, (x + 1), y);
+		data->octosom->dct = 'R';
+	}
 	else if (key != KEY_W && key != KEY_A && key != KEY_S && key != KEY_D
 		&& key != KEY_ARR_UP && key != KEY_ARR_DOWN && key != KEY_ARR_LEFT
 		&& key != KEY_ARR_RIGHT && key == KEY_H)
